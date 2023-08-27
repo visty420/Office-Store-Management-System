@@ -20,10 +20,14 @@ public class AutorController {
         this.autorRepository = autorRepository;
     }
 
-    @PostMapping
+    @PostMapping("/adauga")
     public ResponseEntity<Autor> adaugaAutor(@RequestBody Autor autor) {
-        Autor autorAdaugat = autorRepository.save(autor);
-        return ResponseEntity.status(HttpStatus.CREATED).body(autorAdaugat);
+        try {
+            Autor nouAutor = autorRepository.save(autor);
+            return new ResponseEntity<>(nouAutor, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/{id}")

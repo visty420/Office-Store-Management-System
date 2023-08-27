@@ -21,7 +21,7 @@ public class Autor {
 
     }
 
-    public Autor(int id, String nume, Date dataNasterii, String nationalitate) {
+    /*public Autor(int id, String nume, Date dataNasterii, String nationalitate) {
         if (nume == null || dataNasterii == null || nationalitate == null) {
             throw new IllegalArgumentException("Toate câmpurile trebuie completate.");
         }
@@ -29,7 +29,7 @@ public class Autor {
         this.nume = nume;
         this.dataNasterii = dataNasterii;
         this.nationalitate = nationalitate;
-    }
+    }*/
 
 
     // Getteri și setteri aici...

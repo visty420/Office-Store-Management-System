@@ -32,7 +32,7 @@ public class ProdusController {
         return produsOptional.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("/{adauga}")
     public ResponseEntity<Produs> adaugaProdus(@RequestBody Produs produs) {
         Produs produsAdaugat = produsRepository.save(produs);
         return ResponseEntity.status(HttpStatus.CREATED).body(produsAdaugat);

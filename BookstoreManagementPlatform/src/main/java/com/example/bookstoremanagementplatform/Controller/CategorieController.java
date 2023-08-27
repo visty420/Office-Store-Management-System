@@ -32,7 +32,7 @@ public class CategorieController {
         return categorieOptional.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("/{adauga}")
     public ResponseEntity<Categorie> adaugaCategorie(@RequestBody Categorie categorie) {
         Categorie categorieAdaugata = categorieRepository.save(categorie);
         return ResponseEntity.status(HttpStatus.CREATED).body(categorieAdaugata);
