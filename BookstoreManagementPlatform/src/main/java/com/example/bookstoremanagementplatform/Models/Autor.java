@@ -12,7 +12,7 @@ public class Autor {
     @Column(name = "nume", length = 35)
     private String nume;
     @Temporal(TemporalType.DATE)
-    @Column(name = "data nasterii")
+    @Column(name = "data_nasterii")
     private Date dataNasterii;
     @Column(name = "nationalitate")
     private String nationalitate;

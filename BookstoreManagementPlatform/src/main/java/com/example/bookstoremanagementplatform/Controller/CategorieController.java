@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/categorii")
@@ -27,9 +28,8 @@ public class CategorieController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Categorie> gasesteCategorie(@PathVariable int id) {
-        return categorieRepository.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        Optional<Categorie> categorieOptional = categorieRepository.findById(id);
+        return categorieOptional.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
@@ -38,17 +38,18 @@ public class CategorieController {
         return ResponseEntity.status(HttpStatus.CREATED).body(categorieAdaugata);
     }
 
+
     @PutMapping("/{id}")
     public ResponseEntity<Categorie> actualizeazaCategorie(@PathVariable int id, @RequestBody Categorie categorie) {
         if (!categorieRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
-        categorie.setId(id);
+        categorie.setId(id);  // Asigurați-vă că aveți o metodă setId în clasa Categorie
         Categorie categorieActualizata = categorieRepository.save(categorie);
         return ResponseEntity.ok(categorieActualizata);
     }
 
-    @DeleteMapping("/{id}")
+
     public ResponseEntity<Void> stergeCategorie(@PathVariable int id) {
         if (!categorieRepository.existsById(id)) {
             return ResponseEntity.notFound().build();

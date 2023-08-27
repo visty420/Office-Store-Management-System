@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/produse")
@@ -27,9 +28,8 @@ public class ProdusController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Produs> gasesteProdus(@PathVariable int id) {
-        return produsRepository.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        Optional<Produs> produsOptional = produsRepository.findById(id);
+        return produsOptional.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
@@ -43,7 +43,7 @@ public class ProdusController {
         if (!produsRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
-        produs.setId(id);
+        produs.setId(id);  // Asigurați-vă că aveți o metodă setId în clasa Produs
         Produs produsActualizat = produsRepository.save(produs);
         return ResponseEntity.ok(produsActualizat);
     }

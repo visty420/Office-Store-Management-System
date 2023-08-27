@@ -15,13 +15,13 @@ public class Produs {
     private BigDecimal pret;
     @ManyToOne
     @JoinColumn(name = "id_categorie")
-    private int idCategorie;
+    private Categorie idCategorie;
     @ManyToOne
     @JoinColumn(name = "id_autor")
-    private int idAutor;
+    private Autor idAutor;
 
 
-    public Produs(int id, String nume, BigDecimal pret, int idCategorie, int idAutor) {
+    public Produs(int id, String nume, BigDecimal pret, Categorie idCategorie, Autor idAutor) {
         if (nume == null || pret == null) {
             throw new IllegalArgumentException("Numele și prețul nu pot fi nule.");
         }
@@ -58,30 +58,20 @@ public class Produs {
         this.pret = pret;
     }
 
-    public int getIdCategorie() {
+    public Categorie getIdCategorie() {
         return idCategorie;
     }
 
-    public void setIdCategorie(int idCategorie) {
+    public void setIdCategorie(Categorie idCategorie) {
         this.idCategorie = idCategorie;
     }
 
-    public int getIdAutor() {
+    public Autor getIdAutor() {
         return idAutor;
     }
 
-    public void setIdAutor(int idAutor) {
+    public void setIdAutor(Autor idAutor) {
         this.idAutor = idAutor;
     }
 
-    @Override
-    public String toString() {
-        return "Produs{" +
-                "id=" + id +
-                ", nume='" + nume + '\'' +
-                ", pret=" + pret +
-                ", idCategorie=" + idCategorie +
-                ", idAutor=" + idAutor +
-                '}';
-    }
 }
