@@ -2,26 +2,58 @@ package com.example.bookstoremanagementplatform.Controller;
 
 import com.example.bookstoremanagementplatform.Models.Produs;
 import com.example.bookstoremanagementplatform.Repositories.ProdusRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@RestController
+@RequestMapping("/produse")
 public class ProdusController {
-    private ProdusRepository produsRepository;
 
+    private final ProdusRepository produsRepository;
+
+    @Autowired
     public ProdusController(ProdusRepository produsRepository) {
         this.produsRepository = produsRepository;
     }
-    public void adaugaProdus(Produs produs) {
-        produsRepository.adaugaProdus(produs);
+
+    @GetMapping
+    public List<Produs> listaProduse() {
+        return produsRepository.findAll();
     }
 
-    public Produs gasesteProdus(int id) {
-        return produsRepository.gasesteProdus(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<Produs> gasesteProdus(@PathVariable int id) {
+        return produsRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    public void actualizeazaProdus(Produs produs) {
-        produsRepository.actualizeazaProdus(produs);
+    @PostMapping
+    public ResponseEntity<Produs> adaugaProdus(@RequestBody Produs produs) {
+        Produs produsAdaugat = produsRepository.save(produs);
+        return ResponseEntity.status(HttpStatus.CREATED).body(produsAdaugat);
     }
 
-    public void stergeProdus(int id) {
-        produsRepository.stergeProdus(id);
+    @PutMapping("/{id}")
+    public ResponseEntity<Produs> actualizeazaProdus(@PathVariable int id, @RequestBody Produs produs) {
+        if (!produsRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        produs.setId(id);
+        Produs produsActualizat = produsRepository.save(produs);
+        return ResponseEntity.ok(produsActualizat);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> stergeProdus(@PathVariable int id) {
+        if (!produsRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        produsRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

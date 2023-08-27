@@ -2,27 +2,41 @@ package com.example.bookstoremanagementplatform.Controller;
 
 import com.example.bookstoremanagementplatform.Models.Autor;
 import com.example.bookstoremanagementplatform.Repositories.AutorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
+@RestController
+@RequestMapping("/autori")
 public class AutorController {
-    private AutorRepository autorRepository;
 
+    private final AutorRepository autorRepository;
+
+    @Autowired
     public AutorController(AutorRepository autorRepository) {
         this.autorRepository = autorRepository;
     }
 
-    public void adaugaAutor(Autor autor) {
-        autorRepository.adaugaAutor(autor);
+    @PostMapping
+    public Autor adaugaAutor(@RequestBody Autor autor) {
+        return autorRepository.save(autor);
     }
 
-    public Autor gasesteAutor(int id) {
-        return autorRepository.gasesteAutor(id);
+    @GetMapping("/{id}")
+    public Autor gasesteAutor(@PathVariable int id) {
+        return autorRepository.findById(id).orElse(null);
     }
 
-    public void actualizeazaAutor(Autor autor) {
-        autorRepository.actualizeazaAutor(autor);
+    @PutMapping("/{id}")
+    public Autor actualizeazaAutor(@PathVariable int id, @RequestBody Autor autor) {
+        if (autorRepository.existsById(id)) {
+            autor.setId(id);
+            return autorRepository.save(autor);
+        }
+        return null;
     }
 
-    public void stergeAutor(int id) {
-        autorRepository.stergeAutor(id);
+    @DeleteMapping("/{id}")
+    public void stergeAutor(@PathVariable int id) {
+        autorRepository.deleteById(id);
     }
 }
