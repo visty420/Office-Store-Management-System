@@ -1,13 +1,31 @@
-import java.math.BigDecimal;
+package com.example.bookstoremanagementplatform.Models;
 
+import jakarta.persistence.*;
+
+import java.math.BigDecimal;
+@Entity
+@Table(name = "Produse")
 public class Produs {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "nume")
     private String nume;
+    @Column(name = "pret")
     private BigDecimal pret;
+    @ManyToOne
+    @JoinColumn(name = "id_categorie")
     private int idCategorie;
+    @ManyToOne
+    @JoinColumn(name = "id_autor")
     private int idAutor;
 
+
     public Produs(int id, String nume, BigDecimal pret, int idCategorie, int idAutor) {
+        if (nume == null || pret == null) {
+            throw new IllegalArgumentException("Numele și prețul nu pot fi nule.");
+        }
+
         this.id = id;
         this.nume = nume;
         this.pret = pret;
@@ -15,6 +33,7 @@ public class Produs {
         this.idAutor = idAutor;
     }
 
+    // Getteri și setteri aici...
     public int getId() {
         return id;
     }
@@ -53,5 +72,16 @@ public class Produs {
 
     public void setIdAutor(int idAutor) {
         this.idAutor = idAutor;
+    }
+
+    @Override
+    public String toString() {
+        return "Produs{" +
+                "id=" + id +
+                ", nume='" + nume + '\'' +
+                ", pret=" + pret +
+                ", idCategorie=" + idCategorie +
+                ", idAutor=" + idAutor +
+                '}';
     }
 }
