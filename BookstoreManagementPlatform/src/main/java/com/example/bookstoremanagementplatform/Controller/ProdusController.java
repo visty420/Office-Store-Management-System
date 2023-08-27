@@ -1,12 +1,17 @@
 package com.example.bookstoremanagementplatform.Controller;
 
+import com.example.bookstoremanagementplatform.Models.Categorie;
+import com.example.bookstoremanagementplatform.Models.Autor;
 import com.example.bookstoremanagementplatform.Models.Produs;
+import com.example.bookstoremanagementplatform.Repositories.CategorieRepository;
+import com.example.bookstoremanagementplatform.Repositories.AutorRepository;
 import com.example.bookstoremanagementplatform.Repositories.ProdusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +22,7 @@ public class ProdusController {
     private final ProdusRepository produsRepository;
 
     @Autowired
-    public ProdusController(ProdusRepository produsRepository) {
+    public ProdusController(ProdusRepository produsRepository){
         this.produsRepository = produsRepository;
     }
 
@@ -27,7 +32,7 @@ public class ProdusController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Produs> gasesteProdus(@PathVariable int id) {
+    public ResponseEntity<Produs> gasesteProdus(@PathVariable Integer id) {
         Optional<Produs> produsOptional = produsRepository.findById(id);
         return produsOptional.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
@@ -39,7 +44,7 @@ public class ProdusController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Produs> actualizeazaProdus(@PathVariable int id, @RequestBody Produs produs) {
+    public ResponseEntity<Produs> actualizeazaProdus(@PathVariable Integer id, @RequestBody Produs produs) {
         if (!produsRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
@@ -49,7 +54,7 @@ public class ProdusController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> stergeProdus(@PathVariable int id) {
+    public ResponseEntity<Void> stergeProdus(@PathVariable Integer id) {
         if (!produsRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }

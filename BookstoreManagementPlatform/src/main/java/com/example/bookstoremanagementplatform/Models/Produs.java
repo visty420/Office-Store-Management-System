@@ -1,5 +1,6 @@
 package com.example.bookstoremanagementplatform.Models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -8,20 +9,22 @@ import java.math.BigDecimal;
 public class Produs {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     @Column(name = "nume")
     private String nume;
     @Column(name = "pret")
     private BigDecimal pret;
-    @ManyToOne
+
     @JoinColumn(name = "id_categorie")
-    private Categorie idCategorie;
-    @ManyToOne
+    @JsonProperty("id_categorie")
+    private Integer idCategorie;
+
     @JoinColumn(name = "id_autor")
-    private Autor idAutor;
+    @JsonProperty("id_autor")
+    private Integer idAutor;
 
 
-    public Produs(int id, String nume, BigDecimal pret, Categorie idCategorie, Autor idAutor) {
+    public Produs(Integer id, String nume, BigDecimal pret, Integer categorie, Integer autor) {
         if (nume == null || pret == null) {
             throw new IllegalArgumentException("Numele și prețul nu pot fi nule.");
         }
@@ -29,16 +32,17 @@ public class Produs {
         this.id = id;
         this.nume = nume;
         this.pret = pret;
-        this.idCategorie = idCategorie;
-        this.idAutor = idAutor;
+        this.idCategorie = categorie;
+        this.idAutor = autor;
     }
 
+
     // Getteri și setteri aici...
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -58,19 +62,19 @@ public class Produs {
         this.pret = pret;
     }
 
-    public Categorie getIdCategorie() {
+    public Integer getIdCategorie() {
         return idCategorie;
     }
 
-    public void setIdCategorie(Categorie idCategorie) {
+    public void setIdCategorie(Integer idCategorie) {
         this.idCategorie = idCategorie;
     }
 
-    public Autor getIdAutor() {
+    public Integer getIdAutor() {
         return idAutor;
     }
 
-    public void setIdAutor(Autor idAutor) {
+    public void setIdAutor(Integer idAutor) {
         this.idAutor = idAutor;
     }
 

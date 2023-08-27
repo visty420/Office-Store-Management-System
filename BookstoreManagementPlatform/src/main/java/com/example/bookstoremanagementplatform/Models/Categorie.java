@@ -7,11 +7,11 @@ import jakarta.persistence.*;
 public class Categorie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     @Column(name = "nume")
     private String nume;
 
-    public Categorie(int id, String nume) {
+    public Categorie(Integer id, String nume) {
         if (nume == null || nume.isEmpty()) {
             throw new IllegalArgumentException("Numele categoriei nu poate fi gol.");
         }
@@ -25,11 +25,11 @@ public class Categorie {
     }
 
     // Getteri și setteri aici...
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -40,11 +40,5 @@ public class Categorie {
     public void setNume(String nume) {
         this.nume = nume;
     }
-    @Override
-    public String toString() {
-        return "Categorie{" +
-                "id=" + id +
-                ", nume='" + nume + '\'' +
-                '}';
-    }
+
 }

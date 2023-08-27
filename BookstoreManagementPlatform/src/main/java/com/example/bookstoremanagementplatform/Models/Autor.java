@@ -8,7 +8,7 @@ import java.util.Date;
 public class Autor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     @Column(name = "nume", length = 35)
     private String nume;
     @Temporal(TemporalType.DATE)
@@ -21,7 +21,7 @@ public class Autor {
 
     }
 
-    /*public Autor(int id, String nume, Date dataNasterii, String nationalitate) {
+    public Autor(Integer id, String nume, Date dataNasterii, String nationalitate) {
         if (nume == null || dataNasterii == null || nationalitate == null) {
             throw new IllegalArgumentException("Toate câmpurile trebuie completate.");
         }
@@ -29,15 +29,15 @@ public class Autor {
         this.nume = nume;
         this.dataNasterii = dataNasterii;
         this.nationalitate = nationalitate;
-    }*/
+    }
 
 
     // Getteri și setteri aici...
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -27,7 +27,7 @@ public class CategorieController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Categorie> gasesteCategorie(@PathVariable int id) {
+    public ResponseEntity<Categorie> gasesteCategorie(@PathVariable Integer id) {
         Optional<Categorie> categorieOptional = categorieRepository.findById(id);
         return categorieOptional.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
@@ -40,7 +40,7 @@ public class CategorieController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<Categorie> actualizeazaCategorie(@PathVariable int id, @RequestBody Categorie categorie) {
+    public ResponseEntity<Categorie> actualizeazaCategorie(@PathVariable Integer id, @RequestBody Categorie categorie) {
         if (!categorieRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
@@ -50,7 +50,7 @@ public class CategorieController {
     }
 
 
-    public ResponseEntity<Void> stergeCategorie(@PathVariable int id) {
+    public ResponseEntity<Void> stergeCategorie(@PathVariable Integer id) {
         if (!categorieRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
