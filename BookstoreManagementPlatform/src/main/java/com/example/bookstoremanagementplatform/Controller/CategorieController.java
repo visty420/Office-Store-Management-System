@@ -49,7 +49,7 @@ public class CategorieController {
         return ResponseEntity.ok(categorieActualizata);
     }
 
-
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> stergeCategorie(@PathVariable Integer id) {
         if (!categorieRepository.existsById(id)) {
             return ResponseEntity.notFound().build();

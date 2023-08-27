@@ -37,7 +37,7 @@ public class Produs {
     }
 
     public Produs(){
-        
+
     }
 
     // Getteri și setteri aici...
