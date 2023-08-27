@@ -36,6 +36,9 @@ public class Produs {
         this.idAutor = autor;
     }
 
+    public Produs(){
+        
+    }
 
     // Getteri și setteri aici...
     public Integer getId() {
