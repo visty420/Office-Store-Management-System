@@ -1,0 +1,103 @@
+Documentație pentru Aplicația de Gestionare a Librăriei
+
+Bun venit la documentația aplicației de gestionare a librăriei! Această aplicație dezvoltată în Java folosește PostgreSQL pentru a gestiona datele despre autori, categorii și produse din cadrul unei librării. Următoarele secțiuni vor detalia fiecare componentă și funcționalitate a aplicației.
+Clase și Componente
+Autor
+
+Clasa Autor este utilizată pentru a reprezenta un autor de cărți în librărie. Atributele clasei sunt:
+
+    id (Integer): ID-ul unic al autorului.
+    nume (String): Numele complet al autorului.
+    dataNasterii (Date): Data nașterii autorului.
+    nationalitate (String): Naționalitatea autorului.
+
+Această clasă este asociată cu tabelul "Autori" din baza de date și permite adăugarea, actualizarea, căutarea și ștergerea autorilor.
+Categorie
+
+Clasa Categorie reprezintă o categorie de cărți în librărie. Atributele clasei sunt:
+
+    id (Integer): ID-ul unic al categoriei.
+    nume (String): Numele categoriei.
+
+Această clasă este asociată cu tabelul "Categorii" din baza de date și permite gestionarea categoriilor de cărți prin operații de adăugare, actualizare, căutare și ștergere.
+Produs
+
+Clasa Produs reprezintă o carte disponibilă în librărie. Atributele clasei sunt:
+
+    id (Integer): ID-ul unic al produsului.
+    nume (String): Numele cărții.
+    pret (BigDecimal): Prețul cărții.
+    idCategorie (Integer): ID-ul categoriei căreia îi aparține produsul.
+    idAutor (Integer): ID-ul autorului căruia îi aparține produsul.
+
+Această clasă este legată de tabelul "Produse" din baza de date și permite adăugarea, actualizarea, căutarea și ștergerea cărților.
+MainApplication (sau echivalentul)
+
+Aceasta este clasa principală care servește ca punct de intrare în aplicație. Aici sunt configurate contextul Spring și componentele necesare pentru a rula aplicația.
+Funcționalități și Operații
+Operatii cu Autori
+
+    Adăugare Autor: POST /autori/adauga - Adaugă un autor nou în baza de date.
+
+    Găsire Autor: GET /autori/{id} - Găsește un autor după ID.
+
+    Actualizare Autor: PUT /autori/{id} - Actualizează detaliile unui autor existent.
+
+    Ștergere Autor: DELETE /autori/{id} - Șterge un autor din baza de date.
+
+Operatii cu Categorii
+
+    Adăugare Categorie: POST /categorii/adauga - Adaugă o categorie nouă în baza de date.
+
+    Găsire Categorie: GET /categorii/{id} - Găsește o categorie după ID.
+
+    Actualizare Categorie: PUT /categorii/{id} - Actualizează detaliile unei categorii existente.
+
+    Ștergere Categorie: DELETE /categorii/{id} - Șterge o categorie din baza de date.
+
+Operatii cu Produse
+
+    Listă Produse: GET /produse - Afișează o listă de produse disponibile în librărie.
+
+    Găsire Produs: GET /produse/{id} - Găsește un produs după ID.
+
+    Adăugare Produs: POST /produse/adauga - Adaugă un produs nou în baza de date.
+
+    Actualizare Produs: PUT /produse/{id} - Actualizează detaliile unui produs existent.
+
+    Ștergere Produs: DELETE /produse/{id} - Șterge un produs din baza de date.
+
+Exemple de Utilizare
+
+Pentru a ilustra modul în care se pot folosi aceste funcționalități, iată câteva exemple de cereri HTTP:
+
+    Adăugare Autor Nou:
+
+    bash
+
+POST /autori/adauga
+{
+    "nume": "John Doe",
+    "dataNasterii": "1990-01-15",
+    "nationalitate": "American"
+}
+
+Găsire Produs După ID:
+
+bash
+
+GET /produse/1
+
+Actualizare Categorie Existenta:
+
+bash
+
+    PUT /categorii/2
+    {
+        "nume": "Ficțiune"
+    }
+
+Aceste exemple ilustrează modul în care poți interacționa cu aplicația pentru a gestiona autori, categorii și produse.
+Configurare și Rulare
+
+Pentru a rula aplicația, asigură-te că ai configurat corespunzător baza de date PostgreSQL și că ai setat parametrii corespunzători în clasa application.properties. După configurare, rulează clasa MainApplication pentru a porni aplicația.
