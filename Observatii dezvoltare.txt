@@ -54,3 +54,7 @@ Desigur, iată câteva detalii despre principalele adnotări JPA utilizate în p
     @JsonProperty: Această adnotare este de obicei folosită în contextul serializării și deserializării obiectelor în format JSON. În proiectul tău, ai utilizat aceasta pentru a specifica numele câmpurilor în format JSON pentru a fi utilizate în API-uri.
 
 Aceste adnotări JPA oferă informații semnificative pentru JPA (Java Persistence API) și sunt esențiale pentru a defini modul în care clasele tale Java sunt mapate pe structurile tabelelor din baza de date.
+
+---Unit Testing---
+
+Scopul acestui test de unitate este de a verifica corecta încărcare a contextului aplicației pentru platforma de gestionare a librăriei (Bookstore Management Platform). Acest test se bazează pe utilizarea framework-ului de testare JUnit împreună cu Spring Boot pentru a asigura că componentele aplicației sunt configurate și încărcate corespunzător.
